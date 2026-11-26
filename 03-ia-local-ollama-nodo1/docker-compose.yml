@@ -1,0 +1,52 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: c-ollama-proyfinal
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_MAX_LOADED_MODELS=3
+      - OLLAMA_NUM_PARALLEL=1
+      - OLLAMA_FLASH_ATTENTION=1
+      - OLLAMA_KV_CACHE_TYPE=q8_0
+    volumes:
+      - ollama_data:/root/.ollama
+      - ./init-ollama.sh:/init-ollama.sh:ro
+    entrypoint: ["/bin/sh", "/init-ollama.sh"]
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: unless-stopped
+    depends_on:
+      - ollama
+    ports:
+      - "8080:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+      - open_webui_data:/app/backend/data
+
+  benchmark-web:
+    image: python:3.11-slim
+    container_name: c-benchmark-web
+    restart: unless-stopped
+    depends_on:
+      - ollama
+    ports:
+      - "8085:8085"
+    environment:
+      - OLLAMA_URL=http://ollama:11434
+    volumes:
+      - ./benchmark_web.py:/app/benchmark_web.py:ro
+      - benchmark_data:/app/web
+      - /sys/class/thermal:/sys/class/thermal:ro
+    working_dir: /app
+    command: ["python3", "-u", "/app/benchmark_web.py"]
+
+volumes:
+  ollama_data:
+  open_webui_data:
+  benchmark_data:
