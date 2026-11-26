@@ -3,7 +3,13 @@
 
 * **Materia:** Organización y Arquitectura de Computadoras — Grupo 04
 * **Profesor:** Ing. Ricardo Daniel Vega Gutiérrez
-* **Autor:** Alfredo Coronel Enríquez
+* **Autor:**
+
+Arroyo Onofre Leonardo
+Coronel Enriquez Alfredo
+De la Rosa Flores Fernando
+Núñez Pozos Jorge Carlos
+
 * **Plataforma objetivo:** Raspberry Pi 5 (16 GB RAM, Arquitectura ARM64)
 
 ---
