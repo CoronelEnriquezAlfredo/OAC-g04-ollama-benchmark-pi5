@@ -1,7 +1,3 @@
-En tu repositorio subiste la carpeta `03-ia-local-ollama-nodo1` dentro de la raíz, así que el `README.md` de abajo ya incluye esa ruta exacta para que el despliegue funcione al copiar y pegar.
-
-Haz clic en el botón verde **`Add a README`** que aparece en tu pantalla, pega el siguiente contenido completo y guarda con **`Commit changes...`**:
-
 ```markdown
 # Despliegue Replicable de IA Local (Ollama) y Benchmark Automatizado en Raspberry Pi 5
 
